@@ -1,0 +1,1035 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f9f4 0%, #e0f7fa 100%);
+    color: #1a1a1a;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-family: 'Roboto', sans-serif;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(135deg, #1c2526 0%, #2e3b3e 100%);
+    color: #e0e0e0;
+}
+
+body.dark-mode .festive-background {
+    background: url('https://www.transparenttextures.com/patterns/leaves.png') repeat, linear-gradient(135deg, #1c2526 0%, #2e3b3e 100%);
+}
+
+body.dark-mode .main-header {
+    background: rgba(44, 59, 62, 0.95);
+    border-bottom: 3px solid #66bb6a;
+}
+
+body.dark-mode .logo a,
+body.dark-mode .main-nav ul li a,
+body.dark-mode .page-title,
+body.dark-mode .section-title,
+body.dark-mode .card-title,
+body.dark-mode .footer-title {
+    color: #e0e0e0;
+    text-shadow: 2px 2px 6px rgba(102, 187, 106, 0.3);
+}
+
+body.dark-mode .admin-section,
+body.dark-mode .product-card,
+body.dark-mode .order-card,
+body.dark-mode .analytics-card,
+body.dark-mode .form-card {
+    background: linear-gradient(135deg, #2e3b3e 70%, #3a4b4e 100%);
+    border: 2px solid #66bb6a;
+}
+
+body.dark-mode .festive-card {
+    background: url('https://www.transparenttextures.com/patterns/leaf.png') repeat, #3a4b4e;
+}
+
+body.dark-mode .product-details,
+body.dark-mode .order-details,
+body.dark-mode .dashboard-subtitle {
+    color: #b0bec5;
+}
+
+body.dark-mode .festive-table th {
+    background: linear-gradient(90deg, #66bb6a, #4caf50);
+}
+
+body.dark-mode .festive-table tr:nth-child(even) {
+    background: rgba(102, 187, 106, 0.1);
+}
+
+body.dark-mode .filters,
+body.dark-mode .product-grid,
+body.dark-mode .order-grid {
+    background: rgba(44, 59, 62, 0.8);
+}
+
+body.dark-mode footer {
+    background: linear-gradient(135deg, #121212, #1c2526);
+}
+
+body.dark-mode .footer-links a {
+    color: #90a4ae;
+}
+
+body.dark-mode .footer-links a:hover {
+    color: #66bb6a;
+}
+
+body.dark-mode .copyright {
+    background: #0d0d0d;
+    color: #90a4ae;
+}
+
+/* Particle Background (CSS-based) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: particleMove 20s infinite linear;
+}
+
+@keyframes particleMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Festive Background with Subtle Pattern */
+.festive-background {
+    background: url('https://www.transparenttextures.com/patterns/leaves.png') repeat, linear-gradient(135deg, #f0f9f4 0%, #e0f7fa 100%);
+    background-color: #f9f9f9;
+    position: relative;
+    animation: bgShift 10s infinite alternate;
+}
+
+@keyframes bgShift {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
+}
+
+/* Announcement Bar */
+.announcement-bar {
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Styles */
+.main-header {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px 0;
+    position: sticky;
+    top: 40px;
+    border-bottom: 3px solid #4CAF50;
+}
+
+.festive-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #ff3a2d, #4CAF50, #81C784);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: #2e7d32;
+    text-decoration: none;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(46, 125, 50, 0.3);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.festive-logo:hover {
+    color: #25ca2e;
+    transform: rotate(-5deg);
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav ul li {
+    margin-left: 35px;
+    position: relative;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.main-nav ul li a:hover, .main-nav ul li a.active {
+    color: #e74c3c;
+    text-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+    transform: translateY(-3px);
+}
+
+.main-nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #e74c3c;
+    transition: width 0.3s ease;
+}
+
+.main-nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    margin-left: 20px;
+}
+
+.theme-toggle .festive-button {
+    padding: 8px 12px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.theme-toggle .festive-button:hover {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.1);
+}
+
+/* Admin Dashboard Styles */
+.admin-dashboard {
+    padding: 40px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #2e7d32;
+    text-align: center;
+    padding-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(46, 125, 50, 0.2);
+}
+
+.festive-title {
+    border-bottom: 3px dashed #4CAF50;
+    animation: titleBlink 2s infinite alternate;
+}
+
+@keyframes titleBlink {
+    from { border-color: #4CAF50; }
+    to { border-color: #81C784; }
+}
+
+.dashboard-subtitle {
+    text-align: center;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Loader */
+.loader {
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid #4CAF50;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Admin Section Styles */
+.admin-section {
+    margin-bottom: 50px;
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 70%, #e8f5e9 100%);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.admin-section::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 17px;
+    background: linear-gradient(45deg, #4CAF50, #81C784, #e74c3c, #ff9800);
+    z-index: -1;
+    animation: gradientBorder 5s infinite linear;
+}
+
+@keyframes gradientBorder {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+.admin-section:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.festive-section::before {
+    content: '🌿';
+    position: absolute;
+    top: -25px;
+    left: 10px;
+    font-size: 2.5rem;
+    opacity: 0.4;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #2e7d32;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.festive-section-title {
+    text-shadow: 1px 1px 5px rgba(46, 125, 50, 0.3);
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #4CAF50, #81C784);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.section-title:hover:after {
+    width: 100px;
+}
+
+/* Form Styles */
+.form-card {
+    background: linear-gradient(135deg, #ffffff 70%, #e8f5e9 100%);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    position: relative;
+    border: 2px solid #4CAF50;
+}
+
+.festive-card {
+    background: url('https://www.transparenttextures.com/patterns/leaf.png') repeat, #e8f5e9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-group.half {
+    flex: 1;
+}
+
+.form input,
+.form select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form input:focus,
+.form select:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+    outline: none;
+}
+
+.festive-button {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(90deg, #4CAF50, #2e7d32);
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.festive-button:hover {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(46, 125, 50, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(46, 125, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(46, 125, 50, 0); }
+}
+
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Product and Order Grids with Flip Effect */
+.product-grid,
+.order-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+}
+
+.product-card,
+.order-card {
+    perspective: 1000px;
+    position: relative;
+    height: 350px; /* Fixed height for flip effect */
+}
+
+.product-card .card-inner,
+.order-card .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.product-card:hover .card-inner,
+.order-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.product-card .card-front,
+.product-card .card-back,
+.order-card .card-front,
+.order-card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: linear-gradient(135deg, #ffffff 80%, #e8f5e9 100%);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #4CAF50;
+}
+
+.product-card .card-back,
+.order-card .card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #e8f5e9 80%, #ffffff 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #2e7d32;
+    font-family: 'Roboto', sans-serif;
+}
+
+.product-card .card-back p,
+.order-card .card-back p {
+    margin: 5px 0;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+}
+
+.product-name,
+.order-id {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #2e7d32;
+    text-shadow: 1px 1px 4px rgba(46, 125, 50, 0.2);
+}
+
+.product-details,
+.order-details {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.product-price {
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.product-discount {
+    color: #e74c3c;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+}
+
+.product-actions,
+.order-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.action-button {
+    background: linear-gradient(90deg, #4CAF50, #2e7d32);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+.action-button:hover {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+}
+
+.action-button.edit {
+    background: linear-gradient(90deg, #ff9800, #f57c00);
+}
+
+.action-button.edit:hover {
+    background: linear-gradient(90deg, #f57c00, #ef6c00);
+}
+
+.action-button.deactivate {
+    background: linear-gradient(90deg, #ff5722, #e64a19);
+}
+
+.action-button.deactivate:hover {
+    background: linear-gradient(90deg, #e64a19, #d84315);
+}
+
+.edit-form {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(232, 245, 233, 0.9);
+    border-radius: 8px;
+    border: 2px solid #4CAF50;
+}
+
+/* Category Filters */
+.category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-button {
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+.category-button:hover {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+}
+
+.category-button.active {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+/* Filters for Search and Category Dropdown */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.filters select,
+.filters input {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #fff;
+}
+
+.filters select:focus,
+.filters input:focus {
+    border-color: #2e7d32;
+    box-shadow: 0 0 8px rgba(46, 125, 50, 0.3);
+    outline: none;
+}
+
+.filters input {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Analytics Styles */
+.analytics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.analytics-card {
+    background: linear-gradient(135deg, #ffffff 70%, #e8f5e9 100%);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    position: relative;
+    border: 2px solid #4CAF50;
+}
+
+.analytics-row {
+    display: flex;
+    gap: 30px;
+}
+
+.analytics-card.half {
+    flex: 1;
+}
+
+.card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #2e7d32;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 5px rgba(46, 125, 50, 0.2);
+}
+
+.festive-card-title {
+    border-bottom: 2px dashed #81C784;
+}
+
+.analytics-table-container {
+    overflow-x: auto;
+    border-radius: 10px;
+}
+
+.analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.festive-table th,
+.festive-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.festive-table th {
+    background: linear-gradient(90deg, #4CAF50, #2e7d32);
+    color: #fff;
+    font-weight: 500;
+}
+
+.festive-table tr:nth-child(even) {
+    background: rgba(232, 245, 233, 0.5);
+}
+
+.report-button {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.report-button:hover {
+    background: linear-gradient(90deg, #c0392b, #a93226);
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.back-to-top:hover {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.2);
+    animation: pulse 1s infinite;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+    color: #fff;
+    padding: 40px 0;
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    margin-bottom: 30px;
+    min-width: 200px;
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: #81C784;
+    font-family: "Montserrat", sans-serif;
+    text-shadow: 1px 1px 4px rgba(129, 199, 132, 0.3);
+}
+
+.footer-links {
+    display: flex;
+    gap: 25px;
+}
+
+.footer-links a {
+    color: #bbb;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #4CAF50;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: #2c3e50;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.social-icon:hover {
+    background: #4CAF50;
+    color: #fff;
+    transform: rotate(360deg);
+}
+
+.copyright {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9rem;
+    color: #bbb;
+    background: #1a1a1a;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .analytics-row {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .main-nav ul {
+        justify-content: center;
+    }
+    
+    .main-nav ul li {
+        margin: 0 15px;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+    
+    .product-grid,
+    .order-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .product-grid,
+    .order-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-filters {
+        flex-direction: column;
+    }
+    
+    .category-button {
+        width: 100%;
+    }
+    
+    .filters {
+        flex-direction: column;
+    }
+    
+    .filters .category-filters {
+        width: 100%;
+    }
+    
+    .filters input {
+        width: 100%;
+    }
+}
+
+/* Success and Error Messages */
+.message.success {
+    background: #e8f5e9;
+    border: 2px solid #4CAF50;
+    color: #2e7d32;
+}
+
+.message.error {
+    background: #ffebee;
+    border: 2px solid #e74c3c;
+    color: #c0392b;
+}
+
+/* Order Status Styles */
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+}
+
+.status-confirmed {
+    background: #e8f5e9;
+    color: #2e7d32;
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.2);
+}
+
+.status-processing {
+    background: #fff8e1;
+    color: #ff8f00;
+    box-shadow: 0 2px 6px rgba(255, 143, 0, 0.2);
+}
+
+.status-shipped {
+    background: #e3f2fd;
+    color: #1976d2;
+    box-shadow: 0 2px 6px rgba(25, 118, 210, 0.2);
+}
+
+.status-delivered {
+    background: #e8f5e9;
+    color: #2e7d32;
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.2);
+}
+
+.status-cancelled {
+    background: #ffebee;
+    color: #e74c3c;
+    box-shadow: 0 2px 6px rgba(231, 76, 60, 0.2);
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination button {
+    background: linear-gradient(90deg, #4CAF50, #2e7d32);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+.pagination button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: linear-gradient(90deg, #2e7d32, #1b5e20);
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+}
+
+.pagination span {
+    font-family: "Poppins", sans-serif;
+    color: #1a1a1a;
+    font-size: 1rem;
+}

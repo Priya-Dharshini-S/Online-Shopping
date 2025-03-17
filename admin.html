@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | HEALTHIFY</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://kit.fontawesome.com/abcdef12345.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/admin-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar festive-accent">
+        <p>LISTEN TO THE GREATEST DEALS! FREE SHIPPING ON ORDERS OVER $50</p>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="main-header festive-header">
+        <div class="container">
+            <div class="logo">
+                <a href="#" class="festive-logo">HEALTHIFY</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">SHOP PAGE</a></li>
+                    <li><a href="#" class="active">ADMIN</a></li>
+                    <li><a href="#" onclick="logout()">LOGOUT</a></li>
+                </ul>
+            </nav>
+            <div class="theme-toggle">
+                <button id="themeToggle" class="festive-button" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard -->
+    <main class="admin-dashboard festive-background">
+        <div class="container">
+            <h1 class="page-title festive-title">ADMIN DASHBOARD</h1>
+            <div class="dashboard-subtitle">
+                <p>Enjoy shopping your favourite items at greatest deals and quick delivery</p>
+            </div>
+
+            <!-- Add Product Form -->
+            <section class="admin-section festive-section">
+                <div class="loader"></div>
+                <h2 class="section-title festive-section-title">Add New Product</h2>
+                <div class="form-card festive-card">
+                    <form id="addProductForm" class="form">
+                        <div class="form-group">
+                            <input type="text" id="productName" placeholder="Product Name" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <input type="number" id="productPrice" placeholder="Price" required>
+                            </div>
+                            <div class="form-group half">
+                                <input type="number" id="productDiscountPrice" placeholder="Discount Price (optional)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="productBrand" placeholder="Brand" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <select id="productCategory">
+                                    <option value="fruitss">Fruits</option>
+                                    <option value="veg">Vegetables</option>
+                                    <option value="dairy">Dairy</option>
+                                    <option value="herbayur">HerbalAndAyurvedic</option>
+                                    <option value="oils">Essential Oils</option>
+                                </select>
+                            </ concepts>
+                            <div class="form-group half">
+                                <select id="productCurrency">
+                                    <option value="USD">USD ($)</option>
+                                    <option value="INR">INR (₹)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" id="productAvailability" placeholder="Availability" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="productImageURLs" placeholder="Image URLs (comma-separated)">
+                        </div>
+                        <button type="submit" class="festive-button">Add Product</button>
+                    </form>
+                    <div id="addProductMessage" class="message"></div>
+                </div>
+            </section>
+
+            <!-- Product List -->
+            <section class="admin-section festive-section">
+                <div class="loader"></div>
+                <h2 class="section-title festive-section-title">Manage Products</h2>
+                <div class="filters">
+                    <select id="productCategoryFilter" onchange="loadProducts()">
+                        <option value="all">All Categories</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="veg">Vegetables</option>
+                        <option value="dairy">Dairy</option>
+                        <option value="hebayur">HerbalAndAyurvedic</option>
+                        <option value="oils">Essential Oils</option>
+                    </select>
+                    <input type="text" id="productSearch" placeholder="Search products..." onkeyup="loadProducts()">
+                </div>
+                <div id="productList" class="product-grid"></div>
+                <div id="productPagination" class="pagination"></div>
+            </section>
+
+            <!-- Order Management -->
+            <section class="admin-section festive-section">
+                <div class="loader"></div>
+                <h2 class="section-title festive-section-title">Manage Orders</h2>
+                <div class="filters">
+                    <input type="text" id="orderSearch" placeholder="Search orders..." onkeyup="loadOrders()">
+                </div>
+                <div id="orderList" class="order-grid"></div>
+                <div id="orderPagination" class="pagination"></div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="admin-section festive-section">
+                <div class="loader"></div>
+                <h2 class="section-title festive-section-title">Analytics</h2>
+                <div id="analytics" class="analytics-container">
+                    <!-- Sales Charts -->
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Sales Overview</h3>
+                        <canvas id="salesBarChart" width="400" height="300"></canvas>
+                    </div>
+                    
+                    <div class="analytics-row">
+                        <div class="analytics-card half festive-card">
+                            <h3 class="card-title festive-card-title">Category Distribution</h3>
+                            <canvas id="categoryPieChart" width="400" height="300"></canvas>
+                        </div>
+                        <div class="analytics-card half festive-card">
+                            <h3 class="card-title festive-card-title">Year Comparison</h3>
+                            <canvas id="comparisonChart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Cost Estimation</h3>
+                        <button class="report-button festive-button" onclick="downloadCostEstimationReport()">Download Cost Estimation Report</button>
+                    </div>
+                    
+                    <!-- Top Products -->
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Top Selling Products</h3>
+                        <div id="topProducts" class="analytics-table-container"></div>
+                    </div>
+                    
+                    <!-- Bottom Products -->
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Poor Performing Products</h3>
+                        <div id="bottomProducts" class="analytics-table-container"></div>
+                    </div>
+                    
+                    <!-- Inventory Report -->
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Inventory Report</h3>
+                        <div id="inventoryReport" class="analytics-table-container">
+                            <table id="inventoryTable" class="analytics-table festive-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Product Name</th>
+                                        <th>Category</th>
+                                        <th>Stock</th>
+                                        <th>Price (USD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="inventoryPagination" class="pagination"></div>
+                            <button class="report-button festive-button" onclick="downloadInventoryReport()">Download Inventory Report</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Customer Report -->
+                    <div class="analytics-card festive-card">
+                        <h3 class="card-title festive-card-title">Customer Report</h3>
+                        <div id="customerReport" class="analytics-table-container">
+                            <table id="customerTable" class="analytics-table festive-table">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Total Orders</th>
+                                        <th>Total Spent (USD)</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div id="customerPagination" class="pagination"></div>
+                            <button class="report-button festive-button" onclick="downloadCustomerReport()">Download Customer Report</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top festive-button" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3 class="footer-title">Follow us and enjoy buying your favourite items</h3>
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-pinterest"></i>
+                </div>
+            </div>
+            <div class="footer-section">
+                <div class="footer-links">
+                    <a href="#">Shipping & Returns</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2025 by HEALTHIFY.
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Hide loaders after content loads (placeholder logic)
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.loader').forEach(loader => {
+                loader.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
